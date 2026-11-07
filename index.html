@@ -77,6 +77,111 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Responsive layout and smoother motion */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+        }
+
+        img {
+            height: auto;
+        }
+
+        a,
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            html {
+                scroll-behavior: smooth;
+            }
+
+            .animate-bounce {
+                animation-duration: 2.4s;
+            }
+
+            .transition-all,
+            .transition-colors,
+            .transition-transform,
+            .transition-shadow {
+                transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            }
+        }
+
+        @media (max-width: 639px) {
+            #hero {
+                padding-top: 2.5rem;
+                padding-bottom: 4rem;
+            }
+
+            #hero h1 {
+                font-size: clamp(2.15rem, 9vw, 3rem);
+                overflow-wrap: anywhere;
+            }
+
+            #hero .grid {
+                row-gap: 2.5rem;
+            }
+
+            #hero .flex-wrap {
+                row-gap: 0.75rem;
+            }
+
+            #menu .menu-tab {
+                flex: 1 1 auto;
+                padding-left: 0.85rem;
+                padding-right: 0.85rem;
+            }
+
+            #location .min-h-\[380px\] {
+                min-height: 340px;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+            #hero {
+                padding-top: 4rem;
+                padding-bottom: 5rem;
+            }
+
+            #hero h1 {
+                font-size: clamp(3rem, 6vw, 4rem);
+            }
+
+            #hero .grid {
+                row-gap: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #hero .grid {
+                column-gap: clamp(2rem, 4vw, 4rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-botanical selection:text-white">
@@ -141,7 +246,7 @@
                     <!-- Direct WhatsApp Order Button -->
                     <a href="https://wa.me/60109860779?text=Hi%20Treeby%20Coffee!%20I'd%20like%20to%20inquire%20about%20your%20menu." 
                        target="_blank" rel="noopener noreferrer" 
-                       class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-botanical text-white hover:bg-botanical-dark transition-all shadow-md text-xs font-bold">
+                       class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full bg-botanical text-white hover:bg-botanical-dark transition-all shadow-md text-xs font-bold">
                         <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
                         <span>WhatsApp Us</span>
                     </a>
@@ -264,7 +369,7 @@
                         </div>
 
                         <!-- Floating Brand Logo Badge -->
-                        <div class="absolute -bottom-6 -left-6 bg-white p-3 rounded-2xl shadow-xl border border-sage-soft hidden sm:flex items-center gap-3">
+                        <div class="absolute top-5 right-5 z-10 max-w-[calc(100%-2.5rem)] bg-white p-3 rounded-2xl shadow-xl border border-sage-soft hidden sm:flex items-center gap-3">
                             <div class="w-12 h-12 rounded-full bg-white p-1 border border-botanical shrink-0 flex items-center justify-center">
                                 <img src="image/logo.png" 
                                      alt="Treeby Coffee" 

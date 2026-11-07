@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treeby Coffee | Specialty Coffee Shop in Sibu, Sarawak</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: {
+                            50: '#fdfbf7',
+                            100: '#f4ede2',
+                            200: '#e6d8c3',
+                            300: '#d4bfa1',
+                            400: '#bfa07a',
+                            500: '#a68056',
+                            600: '#8c643e',
+                            700: '#6f4c2f',
+                            800: '#4e3320',
+                            900: '#2b1c13',
+                            950: '#1c120c',
+                        },
+                        amberGold: {
+                            DEFAULT: '#d4a373',
+                            hover: '#c3905e',
+                            bright: '#e6b800',
+                            soft: '#faedcd'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            color: #1c120c;
+        }
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glass-card-dark {
+            background: rgba(43, 28, 19, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Hide scrollbars for clean tray drawer */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amberGold selection:text-espresso-950">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-espresso-950 text-espresso-200 text-xs py-2 px-4 border-b border-espresso-800/60">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-amberGold-bright animate-ping"></span>
+                <span>Visit Us at <strong>Kin Orient Plaza</strong>, Pekan Sibu • Opens Daily from 9:30 AM</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] text-espresso-300">
+                <a href="tel:+60109860779" class="hover:text-amberGold transition-colors"><i class="fa-solid fa-phone mr-1"></i> +60 10-986 0779</a>
+                <span>|</span>
+                <span id="header-time-string"><i class="fa-solid fa-clock mr-1"></i> Sarawak Local Time</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-espresso-200/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#hero" class="flex items-center gap-3.5 group">
+                    <div class="w-11 h-11 rounded-2xl bg-espresso-950 text-amberGold flex items-center justify-center font-serif-title font-bold text-2xl shadow-md group-hover:scale-105 transition-transform duration-300 border border-espresso-800">
+                        T
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif-title text-2xl font-bold tracking-tight text-espresso-950 group-hover:text-amberGold-hover transition-colors">Treeby Coffee</span>
+                        <span class="text-[10px] tracking-widest text-espresso-600 uppercase font-bold">Kin Orient Plaza • Sibu</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-espresso-800">
+                    <a href="#story" class="hover:text-amberGold-hover transition-colors">Our Story</a>
+                    <a href="#menu" class="hover:text-amberGold-hover transition-colors">Crafted Menu</a>
+                    <a href="#reviews" class="hover:text-amberGold-hover transition-colors">Customer Reviews</a>
+                    <a href="#location" class="hover:text-amberGold-hover transition-colors">Location & Hours</a>
+                </nav>
+
+                <!-- Header Actions & Order Tray Toggle -->
+                <div class="flex items-center gap-3">
+                    
+                    <!-- Live Dynamic Open/Closed Status Badge -->
+                    <div id="nav-status-badge" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Checking...</span>
+                    </div>
+
+                    <!-- Tray Button -->
+                    <button onclick="toggleOrderDrawer()" class="relative flex items-center gap-2 px-4 py-2.5 rounded-full bg-espresso-950 text-amberGold hover:bg-espresso-900 transition-all shadow-md">
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                        <span class="text-xs font-bold hidden sm:inline">Order Tray</span>
+                        <span id="tray-badge" class="w-5 h-5 rounded-full bg-amberGold text-espresso-950 text-[11px] font-extrabold flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Mobile Drawer Menu Button -->
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="lg:hidden p-2.5 rounded-xl text-espresso-900 hover:bg-espresso-100 transition-colors">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-drawer" class="hidden lg:hidden bg-espresso-50 border-b border-espresso-200 px-5 pt-3 pb-6 space-y-3">
+            <a href="#story" class="mobile-link block py-2.5 px-3 rounded-xl font-medium text-espresso-900 hover:bg-espresso-100">Our Story</a>
+            <a href="#menu" class="mobile-link block py-2.5 px-3 rounded-xl font-medium text-espresso-900 hover:bg-espresso-100">Crafted Menu</a>
+            <a href="#reviews" class="mobile-link block py-2.5 px-3 rounded-xl font-medium text-espresso-900 hover:bg-espresso-100">Reviews & Ratings</a>
+            <a href="#location" class="mobile-link block py-2.5 px-3 rounded-xl font-medium text-espresso-900 hover:bg-espresso-100">Location & Hours</a>
+            <div class="pt-2 border-t border-espresso-200/80 flex flex-col gap-2">
+                <a href="https://wa.me/60109860779?text=Hi%20Treeby%20Coffee!%20I'd%20like%20to%20inquire%20or%20place%20an%20order." 
+                   target="_blank" rel="noopener noreferrer" 
+                   class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-700 text-white font-semibold text-sm shadow">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>WhatsApp Order & Inquiry</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden bg-gradient-to-b from-espresso-100/80 via-espresso-50 to-espresso-50">
+        <!-- Background Ambient Elements -->
+        <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amberGold/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -left-32 w-96 h-96 rounded-full bg-espresso-300/20 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Text Left -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-espresso-200/80 border border-espresso-300 text-espresso-900 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-mug-hot text-amberGold-hover"></i>
+                        Pekan Sibu's Specialty Coffee Destination
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-bold text-espresso-950 leading-[1.15]">
+                        Savor <span class="italic font-normal text-espresso-700">Exceptional</span> Coffee & Handcrafted Cocoa.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-espresso-800/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Treeby Coffee brings artisanal espresso brews, signature chilled cocoa (冰可可), and freshly baked pastries to Kin Orient Plaza, Pekan Sibu.
+                    </p>
+
+                    <!-- Rating & Quick Metrics -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <div class="flex items-center gap-2.5 px-4 py-2.5 bg-white rounded-2xl shadow-sm border border-espresso-200">
+                            <div class="flex text-amber-500 text-sm gap-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="font-extrabold text-espresso-950 text-base">5.0</span>
+                            <span class="text-xs text-espresso-600 font-medium">(10 Google Reviews)</span>
+                        </div>
+
+                        <div id="hero-status-badge" class="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-2xl text-sm font-semibold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span>Calculating Shop Status...</span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-espresso-950 text-amberGold font-bold text-sm hover:bg-espresso-900 transition-all shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-2.5 group">
+                            <span>Explore Our Menu</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        
+                        <a href="https://www.google.com/maps/search/?api=1&query=UG11,+KIN+ORIENT+PLAZA,+JALAN+TUN+ABANG+OPENG,+Pekan+Sibu,+96000+Sibu,+Sarawak,+Malaysia" 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-espresso-950 border border-espresso-300 font-bold text-sm hover:bg-espresso-100 transition-all text-center flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-map-pin text-amberGold-hover"></i>
+                            <span>Get Directions (Kin Orient Plaza)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Right -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Main Card -->
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-espresso-950 aspect-[4/5]">
+                            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Treeby Coffee Iced Latte" 
+                                 class="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-105"
+                                 onerror="this.src='https://placehold.co/600x750/1c120c/d4a373?text=Treeby+Coffee+Sibu'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-espresso-950/20 to-transparent"></div>
+                            
+                            <!-- Highlight Box -->
+                            <div class="absolute bottom-5 left-5 right-5 p-5 glass-card-dark rounded-2xl border border-espresso-700/60 shadow-xl text-white">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[11px] font-bold tracking-wider text-amberGold uppercase bg-espresso-900/80 px-2.5 py-0.5 rounded-full border border-espresso-700">
+                                        #1 Sibu Customer Choice
+                                    </span>
+                                    <span class="text-sm font-extrabold text-amberGold">RM 12.00</span>
+                                </div>
+                                <h3 class="font-serif-title font-bold text-xl text-white">Handcrafted Iced Latte</h3>
+                                <p class="text-xs text-espresso-200 mt-1">Balanced espresso extracted fresh with chilled velvety micro-foamed milk.</p>
+                                <div class="mt-3 pt-3 border-t border-espresso-800 flex items-center justify-between text-xs">
+                                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-star mr-1"></i> "Iced latte best lah"</span>
+                                    <button onclick="quickAddToTray(1)" class="font-bold text-amberGold hover:underline flex items-center gap-1">
+                                        <span>+ Add to Tray</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-espresso-200 hidden sm:flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-2xl">
+                                ☕
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-espresso-500 font-extrabold uppercase tracking-wider">Customer Rated</p>
+                                <p class="font-bold text-sm text-espresso-950">5.0 Star Coffee Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY & PHILOSOPHY -->
+    <section id="story" class="py-20 bg-white border-y border-espresso-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="p-8 rounded-3xl bg-espresso-50/90 border border-espresso-200/80 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso-950 text-amberGold flex items-center justify-center text-xl mb-6 shadow-md">
+                        <i class="fa-solid fa-coffee-bean"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-bold text-espresso-950 mb-2">Specialty Espresso</h3>
+                    <p class="text-sm text-espresso-700 leading-relaxed">
+                        Every shot is crafted with precision calibration. Experience smooth, velvety lattes, clean pour-overs, and robust espresso drinks.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-espresso-50/90 border border-espresso-200/80 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso-950 text-amberGold flex items-center justify-center text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-glass-water"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-bold text-espresso-950 mb-2">Signature Iced Cocoa (冰可可)</h3>
+                    <p class="text-sm text-espresso-700 leading-relaxed">
+                        A local crowd favorite in Sibu! Rich, bittersweet chocolate layered over ice for a cooling, deeply satisfying flavor profile.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-espresso-50/90 border border-espresso-200/80 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso-950 text-amberGold flex items-center justify-center text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-bold text-espresso-950 mb-2">Kin Orient Plaza Sanctuary</h3>
+                    <p class="text-sm text-espresso-700 leading-relaxed">
+                        Conveniently located at UG11 in Pekan Sibu. Whether grabbing a quick morning coffee or taking a relaxing break, we welcome you.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CRAFTED DIGITAL MENU SECTION -->
+    <section id="menu" class="py-24 bg-espresso-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-espresso-600 bg-espresso-200/60 px-3.5 py-1.5 rounded-full border border-espresso-300">
+                    Artisanal Selection
+                </span>
+                <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-espresso-950 mt-4 mb-4">Drinks & Fresh Bakery</h2>
+                <p class="text-espresso-700 text-base">Select your items to add them to your order tray or send a direct order via WhatsApp.</p>
+            </div>
+
+            <!-- Category Filters & Search Control -->
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-6 mb-10">
+                
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 bg-espresso-200/60 p-1.5 rounded-2xl w-full lg:w-auto border border-espresso-300/50">
+                    <button onclick="filterMenu('all')" id="tab-all" class="menu-tab px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-espresso-950 text-amberGold shadow-md">
+                        All Items
+                    </button>
+                    <button onclick="filterMenu('espresso')" id="tab-espresso" class="menu-tab px-5 py-2.5 rounded-xl text-xs font-bold text-espresso-800 hover:bg-espresso-200/80 transition-all">
+                        Espresso & Coffee
+                    </button>
+                    <button onclick="filterMenu('non-coffee')" id="tab-non-coffee" class="menu-tab px-5 py-2.5 rounded-xl text-xs font-bold text-espresso-800 hover:bg-espresso-200/80 transition-all">
+                        Cocoa & Drinks
+                    </button>
+                    <button onclick="filterMenu('bakery')" id="tab-bakery" class="menu-tab px-5 py-2.5 rounded-xl text-xs font-bold text-espresso-800 hover:bg-espresso-200/80 transition-all">
+                        Bakery & Pastries
+                    </button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full lg:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-espresso-400 text-sm"></i>
+                    <input type="text" id="menu-search" oninput="applyMenuFilters()" placeholder="Search menu (e.g. Latte, 冰可可)..." 
+                           class="w-full pl-11 pr-4 py-3 bg-white border border-espresso-200 rounded-2xl text-sm text-espresso-950 placeholder-espresso-400 focus:outline-none focus:ring-2 focus:ring-amberGold shadow-sm">
+                </div>
+            </div>
+
+            <!-- Menu Grid Dynamic Insertion -->
+            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- JavaScript Injected -->
+            </div>
+
+            <!-- Empty Search Results State -->
+            <div id="no-results" class="hidden text-center py-16 bg-white rounded-3xl border border-espresso-200 shadow-sm mt-6">
+                <i class="fa-solid fa-cookie-bite text-5xl text-espresso-300 mb-4"></i>
+                <p class="text-espresso-950 font-bold text-lg">No matching menu items found</p>
+                <p class="text-xs text-espresso-600 mt-1">Try searching for "Iced Latte", "Cocoa", or "Croissant".</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS & CUSTOMER FEEDBACK -->
+    <section id="reviews" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Review Summary & List -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-espresso-600 bg-espresso-100 px-3.5 py-1.5 rounded-full border border-espresso-200">
+                            Google Verified Feedback
+                        </span>
+                        <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-espresso-950 mt-4">Loved by Sibu Coffee Lovers</h2>
+                        <p class="text-espresso-700 text-sm mt-2">Authentic reviews from visitors at Kin Orient Plaza, Pekan Sibu.</p>
+                    </div>
+
+                    <!-- Rating Card Summary -->
+                    <div class="p-6 rounded-3xl bg-espresso-50 border border-espresso-200 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
+                        <div class="text-center sm:text-left sm:border-r border-espresso-200 sm:pr-8">
+                            <div class="text-5xl font-serif-title font-bold text-espresso-950">5.0</div>
+                            <div class="flex text-amber-500 text-sm gap-1 my-2 justify-center sm:justify-start">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-espresso-600">Based on 10 Google Reviews</div>
+                        </div>
+
+                        <div class="flex-1 space-y-2.5 w-full">
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="w-20 text-espresso-800 font-bold">Coffee Quality</span>
+                                <div class="flex-1 h-2 bg-espresso-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-amberGold w-[100%]"></div>
+                                </div>
+                                <span class="text-espresso-950 font-extrabold">5.0 ★</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="w-20 text-espresso-800 font-bold">Service</span>
+                                <div class="flex-1 h-2 bg-espresso-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-amberGold w-[100%]"></div>
+                                </div>
+                                <span class="text-espresso-950 font-extrabold">5.0 ★</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="w-20 text-espresso-800 font-bold">Atmosphere</span>
+                                <div class="flex-1 h-2 bg-espresso-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-amberGold w-[98%]"></div>
+                                </div>
+                                <span class="text-espresso-950 font-extrabold">4.9 ★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews List Container -->
+                    <div id="reviews-container" class="space-y-4">
+                        <!-- Dynamic Reviews Injected Here -->
+                    </div>
+                </div>
+
+                <!-- Interactive Review Form -->
+                <div class="lg:col-span-5 bg-espresso-50 p-6 sm:p-8 rounded-3xl border border-espresso-200 shadow-sm">
+                    <h3 class="font-serif-title font-bold text-2xl text-espresso-950 mb-1">Share Your Experience</h3>
+                    <p class="text-xs text-espresso-700 mb-6">Your feedback is saved locally in your browser storage.</p>
+
+                    <form id="review-form" onsubmit="submitReview(event)" class="space-y-4">
+                        <div>
+                            <label for="rev-name" class="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1">Your Name</label>
+                            <input type="text" id="rev-name" required placeholder="e.g. Alex Tan" 
+                                   class="w-full px-4 py-3 bg-white border border-espresso-200 rounded-xl text-sm text-espresso-950 focus:outline-none focus:ring-2 focus:ring-amberGold">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1">Rating</label>
+                            <div class="flex gap-2 text-2xl text-amber-500 py-1" id="star-rating-selector">
+                                <i class="fa-solid fa-star cursor-pointer transition-transform hover:scale-110" onclick="setStarRating(1)"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition-transform hover:scale-110" onclick="setStarRating(2)"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition-transform hover:scale-110" onclick="setStarRating(3)"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition-transform hover:scale-110" onclick="setStarRating(4)"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition-transform hover:scale-110" onclick="setStarRating(5)"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="rev-favorite" class="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1">Favorite Item</label>
+                            <input type="text" id="rev-favorite" placeholder="e.g. Handcrafted Iced Latte / 冰可可" 
+                                   class="w-full px-4 py-3 bg-white border border-espresso-200 rounded-xl text-sm text-espresso-950 focus:outline-none focus:ring-2 focus:ring-amberGold">
+                        </div>
+
+                        <div>
+                            <label for="rev-comment" class="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1">Review Details</label>
+                            <textarea id="rev-comment" rows="3" required placeholder="How was your coffee experience, service, or atmosphere at Treeby Coffee?" 
+                                      class="w-full px-4 py-3 bg-white border border-espresso-200 rounded-xl text-sm text-espresso-950 focus:outline-none focus:ring-2 focus:ring-amberGold"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-espresso-950 text-amberGold font-bold text-sm hover:bg-espresso-900 transition-all shadow-md">
+                            Submit Review
+                        </button>
+                    </form>
+
+                    <div id="review-alert" class="hidden mt-4 p-3.5 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold text-center border border-emerald-300">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
+                        Thank you! Your review has been published locally.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & CONTACT CARD SECTION -->
+    <section id="location" class="py-24 bg-espresso-950 text-espresso-100 relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-espresso-800/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-amberGold bg-espresso-900 px-3.5 py-1.5 rounded-full border border-espresso-800">
+                    Find Treeby Coffee
+                </span>
+                <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white mt-4">Location & Operating Hours</h2>
+                <p class="text-espresso-300 text-sm mt-2">Kin Orient Plaza, Pekan Sibu, Sarawak, Malaysia.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Information Card -->
+                <div class="lg:col-span-5 bg-espresso-900/90 p-8 rounded-3xl border border-espresso-800 flex flex-col justify-between space-y-8">
+                    
+                    <div class="space-y-6">
+                        <!-- Address -->
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-2xl bg-espresso-800 flex items-center justify-center text-amberGold shrink-0 border border-espresso-700">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-espresso-400">Exact Store Address</h4>
+                                <p class="text-sm text-white font-semibold mt-1 leading-relaxed">
+                                    UG11, KIN ORIENT PLAZA, Jalan Tun Abang Openg, Pekan Sibu, 96000 Sibu, Sarawak, Malaysia
+                                </p>
+                                <div class="flex flex-wrap items-center gap-2 mt-2">
+                                    <span class="text-[11px] text-espresso-300 bg-espresso-950 px-2.5 py-1 rounded-lg border border-espresso-800 font-mono">
+                                        Plus Code: 7RXG+3F Sibu
+                                    </span>
+                                    <button onclick="copyAddress()" class="text-[11px] text-amberGold hover:underline font-bold">
+                                        <i class="fa-solid fa-copy mr-1"></i> Copy Address
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hours -->
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-2xl bg-espresso-800 flex items-center justify-center text-amberGold shrink-0 border border-espresso-700">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="text-xs font-bold uppercase tracking-wider text-espresso-400">Opening Hours</h4>
+                                    <span id="location-status-badge" class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
+                                        Checking...
+                                    </span>
+                                </div>
+                                <div class="text-sm text-espresso-200 mt-2 space-y-1">
+                                    <div class="flex justify-between border-b border-espresso-800/60 pb-1.5">
+                                        <span>Monday – Sunday</span>
+                                        <span class="font-bold text-white">Opens 9:30 AM Daily</span>
+                                    </div>
+                                </div>
+                                <p class="text-[11px] text-espresso-400 mt-2">
+                                    <i class="fa-solid fa-globe mr-1"></i> Local Time Zone: Malaysia (UTC+8)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phone & WhatsApp -->
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-2xl bg-espresso-800 flex items-center justify-center text-emerald-400 shrink-0 border border-espresso-700">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-espresso-400">Phone & WhatsApp Hotline</h4>
+                                <a href="https://wa.me/60109860779" target="_blank" rel="noopener noreferrer" 
+                                   class="block text-base text-white font-bold mt-1 hover:text-amberGold transition-colors">
+                                    +60 10-986 0779
+                                </a>
+                                <p class="text-xs text-espresso-400 mt-0.5">Click to chat directly on WhatsApp for orders or inquiries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Links -->
+                    <div class="pt-6 border-t border-espresso-800 flex flex-col sm:flex-row gap-3">
+                        <a href="https://www.google.com/maps/search/?api=1&query=UG11,+KIN+ORIENT+PLAZA,+JALAN+TUN+ABANG+OPENG,+Pekan+Sibu,+96000+Sibu,+Sarawak,+Malaysia" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-amberGold text-espresso-950 font-bold text-xs hover:bg-amberGold-hover transition-colors shadow">
+                            <i class="fa-solid fa-diamond-turn-right text-sm"></i>
+                            <span>Google Maps Directions</span>
+                        </a>
+                        <a href="https://wa.me/60109860779?text=Hi%20Treeby%20Coffee!%20I'd%20like%20to%20inquire%20about%20your%20menu." 
+                           target="_blank" rel="noopener noreferrer"
+                           class="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors shadow">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            <span>WhatsApp Message</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Google Maps Direction Block -->
+                <div class="lg:col-span-7 bg-espresso-900 rounded-3xl border border-espresso-800 overflow-hidden relative flex flex-col min-h-[380px]">
+                    <div class="p-4 bg-espresso-950 border-b border-espresso-800 flex items-center justify-between text-xs text-espresso-300">
+                        <span class="flex items-center gap-2 font-semibold">
+                            <i class="fa-solid fa-compass text-amberGold"></i> Pekan Sibu • Kin Orient Plaza UG11
+                        </span>
+                        <span class="text-[11px] text-espresso-400">Sarawak, Malaysia</span>
+                    </div>
+                    
+                    <div class="relative flex-1 bg-espresso-900 flex flex-col items-center justify-center p-8 text-center bg-[radial-gradient(#4e3320_1px,transparent_1px)] [background-size:16px_16px]">
+                        <div class="w-16 h-16 rounded-2xl bg-espresso-800/90 border-2 border-amberGold text-amberGold flex items-center justify-center text-3xl shadow-xl mb-4 animate-bounce">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <h3 class="font-serif-title font-bold text-2xl text-white">Treeby Coffee</h3>
+                        <p class="text-xs text-espresso-300 max-w-md mt-2 mb-6 leading-relaxed">
+                            UG11, KIN ORIENT PLAZA, Jalan Tun Abang Openg, Pekan Sibu, 96000 Sibu, Sarawak, Malaysia
+                        </p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=UG11,+KIN+ORIENT+PLAZA,+JALAN+TUN+ABANG+OPENG,+Pekan+Sibu,+96000+Sibu,+Sarawak,+Malaysia" 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="px-7 py-3 rounded-full bg-white text-espresso-950 font-bold text-xs hover:bg-espresso-100 transition-all shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-espresso-700"></i>
+                            <span>Open Navigation on Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-espresso-950 border-t border-espresso-900 py-12 text-espresso-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-espresso-800 text-amberGold flex items-center justify-center font-serif-title font-bold text-lg border border-espresso-700">
+                        T
+                    </div>
+                    <div>
+                        <span class="font-serif-title text-lg font-bold text-white">Treeby Coffee</span>
+                        <span class="text-[11px] text-espresso-500 ml-2">Kin Orient Plaza, Sibu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-espresso-300 font-medium">
+                    <a href="#story" class="hover:text-amberGold transition-colors">Story</a>
+                    <a href="#menu" class="hover:text-amberGold transition-colors">Menu</a>
+                    <a href="#reviews" class="hover:text-amberGold transition-colors">Reviews</a>
+                    <a href="#location" class="hover:text-amberGold transition-colors">Location</a>
+                </div>
+
+                <p>© <span id="year"></span> Treeby Coffee Sibu. 100% Pure Client-Side Web App.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ORDER TRAY SIDE DRAWER (Modal) -->
+    <div id="tray-backdrop" onclick="toggleOrderDrawer()" class="fixed inset-0 bg-espresso-950/70 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
+    
+    <div id="tray-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Header -->
+        <div class="p-5 bg-espresso-950 text-white flex items-center justify-between border-b border-espresso-800">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-bag-shopping text-amberGold text-lg"></i>
+                <h3 class="font-serif-title font-bold text-lg">Your Order Tray</h3>
+            </div>
+            <button onclick="toggleOrderDrawer()" class="p-2 text-espresso-300 hover:text-white rounded-lg">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Tray Items Container -->
+        <div id="tray-items-container" class="flex-1 p-5 overflow-y-auto space-y-4 no-scrollbar">
+            <!-- Dynamic Tray Content -->
+        </div>
+
+        <!-- Footer / Checkout Button -->
+        <div class="p-5 bg-espresso-50 border-t border-espresso-200 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-espresso-700 font-semibold">Subtotal</span>
+                <span id="tray-subtotal" class="font-serif-title font-extrabold text-espresso-950 text-lg">RM 0.00</span>
+            </div>
+
+            <button id="whatsapp-checkout-btn" onclick="sendWhatsAppOrder()" disabled 
+                    class="w-full py-4 rounded-xl bg-emerald-700 text-white font-bold text-sm hover:bg-emerald-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Order via WhatsApp</span>
+            </button>
+            <p class="text-[11px] text-center text-espresso-500">Orders are formatted and sent directly to Treeby Coffee Sibu (+60 10-986 0779).</p>
+        </div>
+    </div>
+
+
+    <!-- FRONTEND JAVASCRIPT LOGIC -->
+    <script>
+        // 1. MENU DATABASE
+        const menuData = [
+            {
+                id: 1,
+                name: "Handcrafted Iced Latte",
+                category: "espresso",
+                price: 12.00,
+                description: "Signature espresso with chilled milk over ice. Sibu customer favorite ('Iced latte best lah').",
+                tag: "Best Seller",
+                icon: "fa-mug-hot",
+                badgeColor: "bg-amber-100 text-amber-900 border-amber-300"
+            },
+            {
+                id: 2,
+                name: "Signature Iced Cocoa (冰可可)",
+                category: "non-coffee",
+                price: 11.50,
+                description: "Rich, creamy chilled cocoa with a balanced bittersweet finish. Highly recommended non-coffee option.",
+                tag: "Must Try",
+                icon: "fa-glass-water",
+                badgeColor: "bg-amber-100 text-amber-900 border-amber-300"
+            },
+            {
+                id: 3,
+                name: "Specialty Hand Pour Over",
+                category: "espresso",
+                price: 15.00,
+                description: "Single-origin beans hand-brewed to extract delicate floral and fruity notes.",
+                tag: "Artisan Brew",
+                icon: "fa-filter",
+                badgeColor: "bg-espresso-100 text-espresso-900 border-espresso-300"
+            },
+            {
+                id: 4,
+                name: "Flat White (Hot)",
+                category: "espresso",
+                price: 11.00,
+                description: "Double shot of espresso topped with smooth micro-foamed steamed milk.",
+                tag: "Classic",
+                icon: "fa-mug-saucer",
+                badgeColor: "bg-espresso-100 text-espresso-900 border-espresso-300"
+            },
+            {
+                id: 5,
+                name: "Iced Americano",
+                category: "espresso",
+                price: 9.50,
+                description: "Bold espresso shots poured over purified cold water and ice.",
+                tag: "Refreshing",
+                icon: "fa-glass-water-droplet",
+                badgeColor: "bg-espresso-100 text-espresso-900 border-espresso-300"
+            },
+            {
+                id: 6,
+                name: "Japanese Matcha Latte",
+                category: "non-coffee",
+                price: 13.00,
+                description: "Whisked ceremonial matcha green tea blended with fresh milk.",
+                tag: "Popular",
+                icon: "fa-leaf",
+                badgeColor: "bg-emerald-100 text-emerald-900 border-emerald-300"
+            },
+            {
+                id: 7,
+                name: "Butter Croissant",
+                category: "bakery",
+                price: 7.50,
+                description: "Flaky, golden-baked multi-layered butter pastry.",
+                tag: "Fresh Baked",
+                icon: "fa-bread-slice",
+                badgeColor: "bg-orange-100 text-orange-900 border-orange-300"
+            },
+            {
+                id: 8,
+                name: "Burnt Basque Cheesecake",
+                category: "bakery",
+                price: 13.50,
+                description: "Creamy cheesecake center with a rich caramelized top crust.",
+                tag: "Dessert",
+                icon: "fa-cake-candles",
+                badgeColor: "bg-pink-100 text-pink-900 border-pink-300"
+            },
+            {
+                id: 9,
+                name: "Sea Salt Choco Chip Cookie",
+                category: "bakery",
+                price: 5.00,
+                description: "Soft-baked chocolate chunk cookie topped with a touch of sea salt flakes.",
+                tag: "Snack",
+                icon: "fa-cookie",
+                badgeColor: "bg-espresso-100 text-espresso-900 border-espresso-300"
+            }
+        ];
+
+        // 2. ORDER TRAY STATE
+        let orderTray = [];
+        let activeCategory = 'all';
+
+        function renderMenu(items) {
+            const grid = document.getElementById('menu-grid');
+            const noResults = document.getElementById('no-results');
+
+            if (!items || items.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            grid.innerHTML = items.map(item => `
+                <div class="bg-white rounded-3xl p-6 border border-espresso-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-[11px] font-bold px-3 py-1 rounded-full border ${item.badgeColor}">
+                                ${item.tag}
+                            </span>
+                            <span class="font-serif-title font-extrabold text-espresso-950 text-lg">
+                                RM ${item.price.toFixed(2)}
+                            </span>
+                        </div>
+                        <h4 class="font-serif-title font-bold text-xl text-espresso-950 group-hover:text-amberGold-hover transition-colors mb-2">
+                            ${item.name}
+                        </h4>
+                        <p class="text-xs text-espresso-700 leading-relaxed mb-6 font-normal">
+                            ${item.description}
+                        </p>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-espresso-100 flex items-center justify-between">
+                        <span class="text-xs text-espresso-400 capitalize font-medium flex items-center gap-1.5">
+                            <i class="fa-solid ${item.icon}"></i> ${item.category}
+                        </span>
+                        
+                        <div class="flex items-center gap-2">
+                            <button onclick="quickAddToTray(${item.id})" 
+                                    class="text-xs font-bold text-espresso-950 hover:text-white bg-amberGold hover:bg-espresso-950 px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-plus text-[10px]"></i>
+                                <span>Add to Tray</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterMenu(category) {
+            activeCategory = category;
+            
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.classList.remove('bg-espresso-950', 'text-amberGold', 'shadow-md');
+                tab.classList.add('text-espresso-800');
+            });
+            
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-espresso-950', 'text-amberGold', 'shadow-md');
+                activeTab.classList.remove('text-espresso-800');
+            }
+
+            applyMenuFilters();
+        }
+
+        function applyMenuFilters() {
+            const query = (document.getElementById('menu-search').value || '').toLowerCase().trim();
+            
+            const filtered = menuData.filter(item => {
+                const matchesCategory = (activeCategory === 'all') || (item.category === activeCategory);
+                const matchesQuery = item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query);
+                return matchesCategory && matchesQuery;
+            });
+
+            renderMenu(filtered);
+        }
+
+        // TRAY FUNCTIONS
+        function quickAddToTray(itemId) {
+            const item = menuData.find(m => m.id === itemId);
+            if (!item) return;
+
+            const existing = orderTray.find(i => i.id === itemId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                orderTray.push({ ...item, quantity: 1 });
+            }
+
+            updateTrayUI();
+            toggleOrderDrawer(true); // Open tray drawer
+        }
+
+        function updateQuantity(itemId, delta) {
+            const index = orderTray.findIndex(i => i.id === itemId);
+            if (index !== -1) {
+                orderTray[index].quantity += delta;
+                if (orderTray[index].quantity <= 0) {
+                    orderTray.splice(index, 1);
+                }
+            }
+            updateTrayUI();
+        }
+
+        function updateTrayUI() {
+            const container = document.getElementById('tray-items-container');
+            const trayBadge = document.getElementById('tray-badge');
+            const traySubtotal = document.getElementById('tray-subtotal');
+            const checkoutBtn = document.getElementById('whatsapp-checkout-btn');
+
+            const totalCount = orderTray.reduce((sum, item) => sum + item.quantity, 0);
+            const totalAmount = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            trayBadge.innerText = totalCount;
+            traySubtotal.innerText = `RM ${totalAmount.toFixed(2)}`;
+            checkoutBtn.disabled = orderTray.length === 0;
+
+            if (orderTray.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-espresso-400">
+                        <i class="fa-solid fa-bag-shopping text-4xl mb-3 text-espresso-200"></i>
+                        <p class="font-bold text-espresso-700 text-sm">Your tray is empty</p>
+                        <p class="text-xs text-espresso-400 mt-1">Add drinks or bakery items from the menu above.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = orderTray.map(item => `
+                <div class="p-4 bg-espresso-50 rounded-2xl border border-espresso-200 flex items-center justify-between gap-3">
+                    <div class="flex-1">
+                        <h4 class="font-serif-title font-bold text-sm text-espresso-950">${item.name}</h4>
+                        <p class="text-xs text-espresso-600 font-semibold mt-0.5">RM ${item.price.toFixed(2)} each</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border border-espresso-200 shadow-sm">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="text-espresso-700 hover:text-espresso-950 font-bold px-1.5">-</button>
+                        <span class="text-xs font-extrabold text-espresso-950 w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="text-espresso-700 hover:text-espresso-950 font-bold px-1.5">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleOrderDrawer(forceOpen = false) {
+            const drawer = document.getElementById('tray-drawer');
+            const backdrop = document.getElementById('tray-backdrop');
+            
+            if (forceOpen) {
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.toggle('translate-x-full');
+                backdrop.classList.toggle('hidden');
+            }
+        }
+
+        function sendWhatsAppOrder() {
+            if (orderTray.length === 0) return;
+
+            let itemsText = orderTray.map(i => `• ${i.name} x${i.quantity} (RM ${(i.price * i.quantity).toFixed(2)})`).join('\n');
+            let totalAmount = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            let message = `Hi Treeby Coffee Sibu!\nI would like to place an order:\n\n${itemsText}\n\nTotal: RM ${totalAmount.toFixed(2)}\n\nThank you!`;
+            let encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/60109860779?text=${encoded}`, '_blank');
+        }
+
+        // 3. REVIEWS & RATING LOGIC (LocalStorage Persisted)
+        const defaultReviews = [
+            {
+                name: "NGU Sung Kong",
+                rating: 5,
+                comment: "Iced latte best lah",
+                date: "2 months ago",
+                fav: "Handcrafted Iced Latte"
+            },
+            {
+                name: "veronica wong",
+                rating: 5,
+                comment: "Nice coffee spot! Food: 4 | Service: 5. Friendly staff and pleasant atmosphere.",
+                date: "2 months ago",
+                fav: "Specialty Pour Over"
+            },
+            {
+                name: "ngu wendy",
+                rating: 5,
+                comment: "delicious! Food: 5 | Service: 5. Must try the chilled cocoa!",
+                date: "2 months ago",
+                fav: "Signature Iced Cocoa (冰可可)"
+            }
+        ];
+
+        let reviewsList = [];
+        let selectedStars = 5;
+
+        function loadReviews() {
+            const saved = localStorage.getItem('treeby_coffee_reviews_v2');
+            if (saved) {
+                try {
+                    reviewsList = JSON.parse(saved);
+                } catch(e) {
+                    reviewsList = defaultReviews;
+                }
+            } else {
+                reviewsList = defaultReviews;
+            }
+            renderReviews();
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = reviewsList.map(rev => `
+                <div class="p-6 rounded-3xl bg-white border border-espresso-200/90 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-espresso-950 text-amberGold flex items-center justify-center font-bold text-sm border border-espresso-800">
+                                ${rev.name.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-espresso-950">${rev.name}</h4>
+                                <div class="flex text-amber-500 text-xs gap-0.5 mt-0.5">
+                                    ${'<i class="fa-solid fa-star"></i>'.repeat(rev.rating)}
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-espresso-400 font-medium">${rev.date}</span>
+                    </div>
+                    <p class="text-xs text-espresso-800 leading-relaxed font-normal">"${rev.comment}"</p>
+                    ${rev.fav ? `<span class="inline-block text-[11px] font-bold text-espresso-700 bg-espresso-100 px-3 py-1 rounded-lg">Favorite: ${rev.fav}</span>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function setStarRating(stars) {
+            selectedStars = stars;
+            const container = document.getElementById('star-rating-selector');
+            const icons = container.querySelectorAll('i');
+            icons.forEach((icon, idx) => {
+                if (idx < stars) {
+                    icon.classList.add('text-amber-500');
+                    icon.classList.remove('text-espresso-300');
+                } else {
+                    icon.classList.remove('text-amber-500');
+                    icon.classList.add('text-espresso-300');
+                }
+            });
+        }
+
+        function submitReview(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('rev-name').value.trim();
+            const favoriteInput = document.getElementById('rev-favorite').value.trim();
+            const commentInput = document.getElementById('rev-comment').value.trim();
+
+            if (!nameInput || !commentInput) return;
+
+            const newReview = {
+                name: nameInput,
+                rating: selectedStars,
+                comment: commentInput,
+                date: "Just now",
+                fav: favoriteInput || "Treeby Signature Blend"
+            };
+
+            reviewsList.unshift(newReview);
+            localStorage.setItem('treeby_coffee_reviews_v2', JSON.stringify(reviewsList));
+            renderReviews();
+
+            document.getElementById('review-form').reset();
+            setStarRating(5);
+
+            const alert = document.getElementById('review-alert');
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 4000);
+        }
+
+        // 4. DYNAMIC SARAWAK / SIBU LOCAL TIME COMPUTATION (Asia/Kuching UTC+8)
+        function updateLiveStatus() {
+            try {
+                const options = { timeZone: 'Asia/Kuching', hour: 'numeric', minute: 'numeric', hour12: false };
+                const formatter = new Intl.DateTimeFormat([], options);
+                const parts = formatter.format(new Date()).split(':');
+                
+                const currentHour = parseInt(parts[0], 10);
+                const currentMinute = parseInt(parts[1], 10);
+                const currentDecimal = currentHour + (currentMinute / 60);
+
+                // Treeby Coffee Hours: 9:30 AM (9.5) to 6:00 PM (18.0)
+                const isOpen = currentDecimal >= 9.5 && currentDecimal < 18.0;
+
+                const navBadge = document.getElementById('nav-status-badge');
+                const heroBadge = document.getElementById('hero-status-badge');
+                const locationBadge = document.getElementById('location-status-badge');
+                const timeString = document.getElementById('header-time-string');
+
+                // Display local time format
+                const timeOptions = { timeZone: 'Asia/Kuching', hour: '2-digit', minute: '2-digit', hour12: true };
+                const formattedTimeString = new Intl.DateTimeFormat('en-US', timeOptions).format(new Date());
+                if (timeString) timeString.innerHTML = `<i class="fa-solid fa-clock mr-1"></i> Sibu Time: ${formattedTimeString}`;
+
+                if (isOpen) {
+                    if (navBadge) {
+                        navBadge.className = "hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                        navBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open Now`;
+                    }
+                    if (heroBadge) {
+                        heroBadge.className = "flex items-center gap-2 px-4 py-2.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-2xl text-sm font-semibold";
+                        heroBadge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Open Now in Sibu • Closes at 6:00 PM`;
+                    }
+                    if (locationBadge) {
+                        locationBadge.className = "text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800";
+                        locationBadge.innerText = "Open Now";
+                    }
+                } else {
+                    if (navBadge) {
+                        navBadge.className = "hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200";
+                        navBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span> Closed Now`;
+                    }
+                    if (heroBadge) {
+                        heroBadge.className = "flex items-center gap-2 px-4 py-2.5 bg-amber-50 text-amber-900 border border-amber-200 rounded-2xl text-sm font-semibold";
+                        heroBadge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Closed Now • Opens 9:30 AM`;
+                    }
+                    if (locationBadge) {
+                        locationBadge.className = "text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-400 border border-amber-800";
+                        locationBadge.innerText = "Closed Now";
+                    }
+                }
+            } catch (err) {
+                console.log("Timezone status error", err);
+            }
+        }
+
+        // 5. UTILITY FUNCTIONS
+        function copyAddress() {
+            const addressText = "UG11, KIN ORIENT PLAZA, Jalan Tun Abang Openg, Pekan Sibu, 96000 Sibu, Sarawak, Malaysia";
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(addressText);
+            } else {
+                const input = document.createElement('textarea');
+                input.value = addressText;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+            }
+            alert("Address copied to clipboard!");
+        }
+
+        // 6. INIT ON PAGE LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu(menuData);
+            loadReviews();
+            updateLiveStatus();
+            updateTrayUI();
+            
+            document.getElementById('year').innerText = new Date().getFullYear();
+
+            // Mobile menu toggling
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const drawer = document.getElementById('mobile-drawer');
+            const menuIcon = document.getElementById('menu-icon');
+
+            if (menuBtn && drawer) {
+                menuBtn.addEventListener('click', () => {
+                    drawer.classList.toggle('hidden');
+                    menuIcon.className = drawer.classList.contains('hidden') ? 'fa-solid fa-bars text-xl' : 'fa-solid fa-xmark text-xl';
+                });
+
+                document.querySelectorAll('.mobile-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        drawer.classList.add('hidden');
+                        menuIcon.className = 'fa-solid fa-bars text-xl';
+                    });
+                });
+            }
+
+            // Periodically refresh shop status every minute
+            setInterval(updateLiveStatus, 60000);
+        });
+    </script>
+</body>
+</html>
